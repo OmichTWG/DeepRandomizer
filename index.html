@@ -1,0 +1,40 @@
+﻿<html>
+	<head>
+		<title>Deeper and deeper</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+
+		<div class="weapon-container">
+			<div class="weapon-name weapon-text weapon-style"></div>
+			<div class="weapon-desc weapon-text weapon-style"></div>
+			<div class="weapon-image weapon-style"></div>
+			<div class="weapon-timer weapon-text weapon-style"></div>
+		</div>
+
+		<div class="restart-container">
+			<div>
+				You lose
+				<button onclick="gui_restartGame()">RESTART</button>
+			</div>
+		</div>
+
+		<div class="win-container">
+			<div>
+				You win! Congrats!
+				<button onclick="gui_restartGame()">YAY</button>
+			</div>
+		</div>
+
+		<div class="learn-container">
+			<div>
+				Hey! Here is a little instruction how to play. You have random weapon, that change every time when you use it. You can see his name, description, image and time in left down corner. When time will pass, you lost one life and get another weapon. You target is you beloved - triangle, she is deep underground. AD - walk, W, Space - jump. LMB - use weapon. M - turn off this awful music. Enjoy!
+				<button onclick="gui_showLearn(false)">YES, THIS IS SO COOL</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="myengine.min.js"></script>
+	<script type="text/javascript" src="game-config.js"></script>
+</html>
