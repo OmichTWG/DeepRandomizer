@@ -32,8 +32,6 @@ const sevenEffects = [
         }
     },
     () => {
-        const _size = random(0, 3);
-        const _length = random(0, 3);
         return {
             id: 1,
             desc: `You take damage.`,
@@ -76,10 +74,11 @@ const effects = [
             id: 2,
             desc: `Shoot X-shape ${length[_length][0]} ${size[_size][0]} laser.`,
             action: function () {
-                createLaser(this.x, this.y, this.x + 1, this.y + 1, size[_size][1], length[_length][1]);
-                createLaser(this.x, this.y, this.x + 1, this.y - 1, size[_size][1], length[_length][1]);
-                createLaser(this.x, this.y, this.x - 1, this.y + 1, size[_size][1], length[_length][1]);
-                createLaser(this.x, this.y, this.x - 1, this.y - 1, size[_size][1], length[_length][1]);
+                const a = Math.sqrt(2) / 2 * size[_size][1] * 16;
+                createLaser(this.x + a, this.y + a, this.x + 1, this.y + 1, size[_size][1], length[_length][1]);
+                createLaser(this.x + a, this.y - a, this.x + 1, this.y - 1, size[_size][1], length[_length][1]);
+                createLaser(this.x - a, this.y + a, this.x - 1, this.y + 1, size[_size][1], length[_length][1]);
+                createLaser(this.x - a, this.y - a, this.x - 1, this.y - 1, size[_size][1], length[_length][1]);
             }
         }
     },
@@ -90,10 +89,11 @@ const effects = [
             id: 3,
             desc: `Shoot cross-shape ${length[_length][0]} ${size[_size][0]} laser.`,
             action: function () {
-                createLaser(this.x, this.y, this.x, this.y + 1, size[_size][1], length[_length][1]);
-                createLaser(this.x, this.y, this.x + 1, this.y, size[_size][1], length[_length][1]);
-                createLaser(this.x, this.y, this.x - 1, this.y, size[_size][1], length[_length][1]);
-                createLaser(this.x, this.y, this.x, this.y - 1, size[_size][1], length[_length][1]);
+                const a = size[_size][1] * 16;
+                createLaser(this.x, this.y + a, this.x, this.y + 1, size[_size][1], length[_length][1]);
+                createLaser(this.x + a, this.y, this.x + 1, this.y, size[_size][1], length[_length][1]);
+                createLaser(this.x - a, this.y, this.x - 1, this.y, size[_size][1], length[_length][1]);
+                createLaser(this.x, this.y - a, this.x, this.y - 1, size[_size][1], length[_length][1]);
             }
         }
     },

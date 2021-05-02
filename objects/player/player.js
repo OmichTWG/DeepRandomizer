@@ -75,7 +75,7 @@ addObject({
         keyPress.forEach(code => {
             const jump = () => {
                 if (this.spaceDelay <= 0) {
-                    if (collisionMatrixThree(this.x, this.y + 8, this.collider, 0, 1)) {
+                    if (collisionMatrixThree(this.x, this.y + 4, this.collider, 0, 1)) {
                         this.spacePromise = true;
                     }
                     this.spaceDelay = 25;
