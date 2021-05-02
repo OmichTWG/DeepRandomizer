@@ -1,32 +1,26 @@
 const gravity = function (collide = false) {
-    if(!collisionMatrix(this.x, this.y + (!collide ? this.vspeed : 0), this.collider, 0, Math.sign(this.vspeed))) {
+    if(!collisionMatrixThree(this.x, this.y + (!collide ? this.vspeed : 0), this.collider, 0, Math.sign(this.vspeed))) {
         this.y += this.vspeed;
-        this.vspeed += global.g;
+        if (this.vspeed <= 7 - global.g) {
+            this.vspeed += global.g;
+        } else {
+            this.vspeed = 7;
+        }
     } else {
         this.vspeed = 0;
     }
 }
 
-const getMatrixCollision = (x, y, xd, yd) => {
-    try {
-        const _y = y - global.world.top * 16;
-        if (global.matrix[Math.floor(x / 16) + xd][Math.floor(_y / 16) + yd]) {
-            const dirt = instanceCreate('dirt', (Math.floor(x / 16) + xd) * 16, (Math.floor(y / 16) + yd) * 16);
-            dirt.mc = {x: Math.floor(x / 16) + xd, y: Math.floor(_y / 16) + yd}
-        }
-    } catch (e) {
-
-    }
-}
-
-const collisionMatrix = (x, y, collider, xd, yd) => {
+const collisionMatrix = (x, y, collider, xd, yd, xofs = 0, yofs = 0) => {
     const _y = y - global.world.top * 16;
     const nx = Math.floor(x / 16) + xd;
     const ny = Math.floor(_y / 16) + yd;
+    setDrawColor('white');
     if (nx >= 0 && ny >= -16 && nx < global.world.w && ny < global.world.h) {
-        if (global.matrix[Math.floor(x / 16) + xd][Math.floor(_y / 16) + yd]) {
-            const tx = (Math.floor(x / 16) + xd) * 16;
-            const ty = (Math.floor(y / 16) + yd) * 16;
+        if (global.matrix[nx + xofs][ny + yofs] > 0) {
+            const tx = (Math.floor(x / 16) + xd) * 16 + xofs * 16;
+            const ty = (Math.floor(y / 16) + yd) * 16 + yofs * 16;
+            //drawRect(tx - camera.x, ty - camera.y, 16, 16);
             return checkCollision({x, y, collider}, {
                 x: tx,
                 y: ty,
@@ -36,6 +30,14 @@ const collisionMatrix = (x, y, collider, xd, yd) => {
             return false;
         }
     } else {
+        return true;
+    }
+}
+
+const collisionMatrixThree = (x, y, collider, xd, yd) => {
+    try {
+        return [-1, 0, 1].reduce((a, i) => a || collisionMatrix(x, y, collider, xd, yd, yd !== 0 ? i : 0, xd !== 0 ? i : 0), false);
+    } catch (e) {
         return true;
     }
 }

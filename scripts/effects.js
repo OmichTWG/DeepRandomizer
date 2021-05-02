@@ -140,7 +140,7 @@ const effects = [
             desc: `Damage something on point you click.`,
             action: function () {
                 const cd = instanceCreate('circleDamage', camera.x + mouse.x, camera.y + mouse.y);
-                cd.setSize(1);
+                cd.setSize(10);
             }
         }
     },
@@ -150,7 +150,7 @@ const effects = [
             desc: `Heal something on point you click.`,
             action: function () {
                 const cd = instanceCreate('circleDamage', camera.x + mouse.x, camera.y + mouse.y);
-                cd.setSize(1);
+                cd.setSize(10);
                 cd.type = 'heal';
             }
         }

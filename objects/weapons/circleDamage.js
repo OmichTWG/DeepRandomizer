@@ -5,10 +5,15 @@ addObject({
         r: 0
     },
     type: 'damage',
+    t: 1,
     setSize(r) {
         this.collider.r = r;
     },
     step() {
-        instanceDestroy(this);
+        if (this.t && this.type !== 'heal') {
+            this.t--;
+        } else {
+            instanceDestroy(this);
+        }
     }
 });

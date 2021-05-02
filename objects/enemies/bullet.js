@@ -1,6 +1,8 @@
 addObject({
     name: 'bullet',
     sprite: sprites.get('bullet'),
+    tpX: 2,
+    tpY: 2,
     collider: {
         type: 'box',
         x1: -3,
@@ -8,8 +10,7 @@ addObject({
         x2: 3,
         y2: 3
     },
-    animationSpeed: 0,
-    frameNumber: 0,
+    animationSpeed: 0.3,
     dir: null,
     type: 'enemy',
     collision(obj) {

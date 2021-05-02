@@ -75,7 +75,7 @@ addObject({
         keyPress.forEach(code => {
             const jump = () => {
                 if (this.spaceDelay <= 0) {
-                    if (collisionMatrix(this.x, this.y + 20, this.collider, 0, 1)) {
+                    if (collisionMatrixThree(this.x, this.y + 8, this.collider, 0, 1)) {
                         this.spacePromise = true;
                     }
                     this.spaceDelay = 25;
@@ -88,6 +88,7 @@ addObject({
                 case 'KeyA':
                     x += -1;
                     break;
+
                 case 'Space':
                     jump();
                     break;
@@ -155,12 +156,12 @@ addObject({
 
         const moveX = this.inertia * direction.x;
 
-        if (!collisionMatrix(this.x + moveX, this.y - 1, this.collider, direction.x, 0)) {
+        if (!collisionMatrixThree(this.x + moveX, this.y - 1, this.collider, direction.x, 0)) {
             this.x += moveX;
         }
 
-        if(this.spacePromise && collisionMatrix( this.x, this.y + 2, this.collider, 0, 1)) {
-            console.log(collisionMatrix( this.x, this.y + 2, this.collider, 0, 1))
+        if(this.spacePromise && collisionMatrixThree( this.x, this.y + 2, this.collider, 0, 1)) {
+            console.log(collisionMatrixThree( this.x, this.y + 2, this.collider, 0, 1))
             this.vspeed = -4;
             this.spacePromise = false;
         }
